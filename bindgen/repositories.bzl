@@ -87,22 +87,31 @@ cc_import(
 
 def _bindgen_clang_repositories():
     # Releases @ http://releases.llvm.org/download.html
+    # wait for llvm-15-0-0 for x86_64 uploaded
+    # https://discourse.llvm.org/t/llvm-15-0-0-release/65099/9
     maybe(
         http_archive,
-        name = "bindgen_clang_linux",
-        urls = ["https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz"],
-        strip_prefix = "clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04",
-        sha256 = "b25f592a0c00686f03e3b7db68ca6dc87418f681f4ead4df4745a01d9be63843",
+        name = "bindgen_clang_x86_64_linux",
+        urls = ["https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz"],
+        strip_prefix = "clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04",
         build_file_content = _CLANG_BUILD_FILE.format(suffix = "so"),
-        workspace_file_content = _COMMON_WORKSPACE.format("bindgen_clang_linux"),
+        workspace_file_content = _COMMON_WORKSPACE.format("bindgen_clang_x86_64_linux"),
     )
 
     maybe(
         http_archive,
-        name = "bindgen_clang_osx",
-        urls = ["https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-apple-darwin.tar.xz"],
-        strip_prefix = "clang+llvm-10.0.0-x86_64-apple-darwin",
-        sha256 = "633a833396bf2276094c126b072d52b59aca6249e7ce8eae14c728016edb5e61",
+        name = "bindgen_clang_x86_64_osx",
+        urls = ["https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.0/clang+llvm-15.0.0-x86_64-apple-darwin.tar.xz"],
+        strip_prefix = "clang+llvm-15.0.0-x86_64-apple-darwin",
         build_file_content = _CLANG_BUILD_FILE.format(suffix = "dylib"),
-        workspace_file_content = _COMMON_WORKSPACE.format("bindgen_clang_osx"),
+        workspace_file_content = _COMMON_WORKSPACE.format("bindgen_clang_x86_64_osx"),
+    )
+
+    maybe(
+        http_archive,
+        name = "bindgen_clang_arm64_osx",
+        urls = ["https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.0/clang+llvm-15.0.0-arm64-apple-darwin21.0.tar.xz"],
+        strip_prefix = "clang+llvm-15.0.0-arm64-apple-darwin21.0",
+        build_file_content = _CLANG_BUILD_FILE.format(suffix = "dylib"),
+        workspace_file_content = _COMMON_WORKSPACE.format("bindgen_clang_arm64_osx"),
     )
