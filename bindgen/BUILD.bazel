@@ -29,12 +29,12 @@ rust_bindgen_toolchain(
     clang = select({
         "//rust/platform:x86_64-apple-darwin": "@bindgen_clang_x86_64_osx//:clang",
         "//rust/platform:aarch64-apple-darwin": "@bindgen_clang_arm64_osx//:clang",
-        "//conditions:default": "@bindgen_clang_linux_x86_64//:clang",
+        "//conditions:default": "@bindgen_clang_x86_64_linux//:clang",
     }),
     libclang = select({
         "//rust/platform:x86_64-apple-darwin": "@bindgen_clang_x86_64_osx//:libclang",
         "//rust/platform:aarch64-apple-darwin": "@bindgen_clang_arm64_osx//:libclang",
-        "//conditions:default": "@bindgen_clang_linux_x86_64//:clang",
+        "//conditions:default": "@bindgen_clang_x86_64_linux//:clang",
     }),
     libstdcxx = select({
         "//rust/platform:x86_64-apple-darwin": "@bindgen_clang_x86_64_osx//:libc++",
